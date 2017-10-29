@@ -3,12 +3,11 @@ package at.works.tasks.domain;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Task implements Comparable<Task> {
 
-    private Long id;
-    private String uuid;
-
+    private UUID uuid;
     private String title;
     private String description;
     private int priority;
@@ -29,19 +28,11 @@ public class Task implements Comparable<Task> {
         return ReflectionToStringBuilder.toString(this);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 

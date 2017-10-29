@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -48,15 +49,15 @@ public class TaskController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public TaskDto getTaskById(@PathVariable("id") String taskId) throws Exception {
-        return validateAndMap(taskService.getTaskById(taskId));
+    @RequestMapping(value = "/tasks/{uuid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskDto getTaskById(@PathVariable("uuid") String taskUuid) throws Exception {
+        return validateAndMap(taskService.getTaskByUuid(UUID.fromString(taskUuid)));
     }
 
-    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/tasks/{uuid}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteTaskById(@PathVariable("id") String taskId) throws Exception {
-        taskService.deleteTask(taskId);
+    public void deleteTaskById(@PathVariable("uuid") String taskUuid) throws Exception {
+        taskService.deleteTask(UUID.fromString(taskUuid));
     }
 
     @RequestMapping(value = "/tasks/update", method = RequestMethod.POST,
@@ -74,11 +75,15 @@ public class TaskController {
     }
 
     private Task validateAndMap(TaskDto taskDto) {
-        return modelMapper.map(taskDto, Task.class);
+        Task task = modelMapper.map(taskDto, Task.class);
+        task.setUuid(UUID.fromString(taskDto.getUuid()));
+        return task;
     }
 
     private TaskDto validateAndMap(Task task) {
-        return modelMapper.map(task, TaskDto.class);
+        TaskDto taskDto = modelMapper.map(task, TaskDto.class);
+        taskDto.setUuid(task.getUuid().toString());
+        return taskDto;
     }
 
 }

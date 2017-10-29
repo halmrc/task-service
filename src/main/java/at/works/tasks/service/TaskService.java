@@ -57,18 +57,18 @@ public class TaskService {
     }
 
     public void updateTask(Task task) {
-        TaskDao original = taskRepository.findOne(task.getId());
+        TaskDao original = taskRepository.findOne(task.getUuid());
         task.setUpdatedAt(new Date());
         BeanUtils.copyProperties(task, original);
         taskRepository.save(modelMapper.map(task, TaskDao.class));
     }
 
-    public void deleteTask(String taskId) {
-        taskRepository.delete(Long.valueOf(taskId));
+    public void deleteTask(UUID taskUuid) {
+        taskRepository.delete(taskUuid);
     }
 
-    public Task getTaskById(String taskId) {
-        return modelMapper.map(taskRepository.findOne(Long.valueOf(taskId)), Task.class);
+    public Task getTaskByUuid(UUID taskUuid) {
+        return modelMapper.map(taskRepository.findOne(taskUuid), Task.class);
     }
 
 
@@ -104,7 +104,6 @@ public class TaskService {
 
     protected Task createRandomTask() {
         Task task = new Task();
-        task.setUuid(UUID.randomUUID().toString());
         task.setTitle(randomString());
         task.setDescription(randomString());
         task.setCreatedAt(new Date());

@@ -13,7 +13,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>UUID</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -27,7 +26,6 @@
                 </thead>
                 <tbody>
                     <tr th:each="task : ${tasks}">
-                        <td><label th:text="${task.id}" /></td>
                         <td><label th:text="${task.uuid}" /></td>
                         <td><label th:text="${task.title}" /></td>
                         <td><label th:text="${task.description}" /></td>

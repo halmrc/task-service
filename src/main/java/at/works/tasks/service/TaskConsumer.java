@@ -20,15 +20,16 @@ public class TaskConsumer implements Runnable {
         this.taskQueue = taskQueue;
     }
 
+    @Override
     public void run() {
         try {
             while (true) {
                 while (taskQueue.isEmpty()) Thread.sleep(1000);
                 Task task = taskQueue.take();
-                logger.info("Task running: " + task.toString());
 
                 //PROCESS
                 task.setStatus(Status.RUNNING);
+                logger.info("Task running: " + task.toString());
                 task.setStatus(Status.FINISHED);
                 task.setResolvedAt(new Date());
 

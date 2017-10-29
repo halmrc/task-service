@@ -6,7 +6,7 @@
 
 ## API DOCUMENTATION
 
-* HTTP-GET: http://localhost:8080/tasks/all                         -> GET ALL TASKS <br>
+* HTTP-GET: http://localhost:8080/tasks/all                         -> GET ALL TASKS 
 * HTTP-GET: http://localhost:8080/tasks/status?status=FINISHED      -> GET TASK BY STATUS (WAITING, RUNNING, FINISHED)
 * HTTP-GET: http://localhost:8080/tasks/1                           -> GET TASK BY ID
 * HTTP-DELETE: http://localhost:8080/tasks/1                        -> DELETE TASK BY ID

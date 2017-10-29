@@ -8,8 +8,6 @@ import java.util.Date;
 public class TaskDto {
 
     @NotNull
-    private Long id;
-    @NotNull
     private String uuid;
 
     private String title;
@@ -21,14 +19,6 @@ public class TaskDto {
     private Date updatedAt;
     private Date dueDate;
     private Date resolvedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUuid() {
         return uuid;

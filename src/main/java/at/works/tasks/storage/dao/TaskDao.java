@@ -1,6 +1,8 @@
 package at.works.tasks.storage.dao;
 
 import at.works.tasks.domain.Status;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,11 +13,11 @@ import java.util.UUID;
 public class TaskDao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
-    @Column(name = "UUID", nullable = false, unique = true)
-    private String uuid;
+    @GenericGenerator(name = "uuid-gen", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid-gen")
+    @Type(type="pg-uuid")
+    @Column(name = "UUID")
+    private UUID uuid;
     @Column(name = "TITLE")
     private String title;
     @Column(name = "DESCRIPTION")
@@ -37,24 +39,15 @@ public class TaskDao {
     public TaskDao() {}
 
     public TaskDao(String title, String description) {
-        this.uuid = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
