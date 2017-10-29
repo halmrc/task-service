@@ -1,0 +1,33 @@
+version: '2'
+services:
+    tasks-web:
+           container_name: task-service
+           build:
+               context: .
+               dockerfile: Dockerfile
+           image: task-service:latest
+           depends_on:
+             - tasks-db
+           ports:
+             - 8080:8080
+           volumes:
+               - task-service:/var/lib/task-service
+           logging:
+               driver: json-file
+
+    tasks-db:
+        container_name: postgres-db
+        image: postgres
+        volumes:
+            - postgres-db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=demo
+            - POSTGRES_USER=demo
+            - POSTGRES_DB=tasks-db
+            - PGDATA=/var/lib/postgresql/data/postgresdata
+        ports:
+            - 5432:5432
+
+volumes:
+    postgres-db: {}
+    task-service: {}

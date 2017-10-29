@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" href="../../bootstrap.min.css" />
+</head>
+<body>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h1 style="text-align: center">Task Dashboard</h1></div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UUID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>DueDate</th>
+                        <th>Resolved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="task : ${tasks}">
+                        <td><label th:text="${task.id}" /></td>
+                        <td><label th:text="${task.uuid}" /></td>
+                        <td><label th:text="${task.title}" /></td>
+                        <td><label th:text="${task.description}" /></td>
+                        <td><label th:text="${task.priority}" /></td>
+                        <td><label th:text="${task.status}" /></td>
+                        <td><label th:text="${task.createdAt}" /></td>
+                        <td><label th:text="${task.updatedAt}" /></td>
+                        <td><label th:text="${task.dueDate}" /></td>
+                        <td><label th:text="${task.resolvedAt}" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
